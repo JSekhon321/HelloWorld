@@ -1,0 +1,18 @@
+version: 0.1
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - docker login -u AWS -p AQECAHhwm0YaISJeRtJm5n1G6uqeekXuoXXPe5UFce9Rq8/14wAAAyEwggMdBgkqhkiG9w0BBwagggMOMIIDCgIBADCCAwMGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMPeH/eKNTDUj2urw6AgEQgIIC1KC1l0m/BFcOyf/CnummnM44Zs8bTtNRENpmd+8zX7BZ/KWKxUptczGLQ66Q4jNS0fWn0xHLDEfXkM2U6UpaZXO1hW6zpbe82MGdsE/jq52ycfuRbnigbDZv3CFiMCY08oRXmVKJMCWP1SaW/33sbkDjZnPWiSBwbprXwXFKQA29cNz2jvprzML0CYsbctZrO+GpqHxY7GhF3UuLVZY/2ybmp/bNP4lY8VYJEL4rgXsXm7tYFnMqCv0RDrAIT3CIErZgS81wzcHN/KOwiGpPCuBBcIavd4X/0Ocaw+CJhfwqJoIFyFGrfNv3tWmtP5NlF6jn2myD2Kv4tS0MwOTRfSxhk48haucN6vzM852mFCrBrmohEIiWOnJatC6Mk3qnngzcmvcZuQs2abOMY2hBW7gnJmaWxRBKS5/nK56Xm1y4hk2XGjTjAWCO0Up17XZl2B9MxtQ1fRET18xqN/bp4btezHNDbHQZYCDT5rji5d6bahV0DcalUvdY0ZOp5H6Ut1xmJBxnH9YNZjGD7Af8aRZcJjTd0d5cF//AVTEMKASSo58KLbBB/TOpHMBK4OeUCT7ObP1Qgzpf8NsRLw7/GLDY1b2TxA+ReyEtwBxEDUkMBOfHGc7+qN6CnNuMdE+XqvjxRojlg4DACUjZ0NZp09kBTSNMFzIFSVpOlxFJWjjirfnnaK0pXiRU/cuB9DOxZ88We/FFqvE1oc39ZDzHtmRW9qO02F+tsVXDc0vt0ZTazdKIPXTb3xCNFVteu0A+Rl0zOmY2ZPAa/wgULvNPCUmOv6mjteYxlkVEYE8wKariW+g06SlEeK4m35YGxmNKMSFyuz0M6Mr15Ucwlya3OPFwt+UABzXoUXZdOeSGnnGn5rpV0hAbWgMn5A+x+xOC9iyt798D0nUVyJu+auluDrksjbRysv5Y53fOGohmQ91b7t9eD/ph1bjg3sfVUS+jkkZ+w+s= -e none https://521114670123.dkr.ecr.us-east-1.amazonaws.com
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t lamp:latest .
+      - docker tag lamp:latest 521114670123.dkr.ecr.us-east-1.amazonaws.com/lamp:latest
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push 521114670123.dkr.ecr.us-east-1.amazonaws.com/lamp:latest
